@@ -625,6 +625,11 @@ class Parser(object):
         while self.try_accept('[', ']'):
             array_dimension += 1
 
+        # Handle the array type like `Object...`
+        if array_dimension == 0:
+            if self.try_accept('...'):
+                array_dimension += 1
+                
         return [None] * array_dimension
 
 # ------------------------------------------------------------------------------
